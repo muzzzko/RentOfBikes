@@ -1,0 +1,36 @@
+﻿@model IEnumerable<RentViewModel>
+<style type="text/css">
+</style>
+<table class="table">
+    <tr>
+        <td>Клиент</td>
+        <td>Велосипед</td>
+        <td>Время старта проката</td>
+        <td>Депозит</td>
+    </tr>
+    @foreach (RentViewModel rent in Model)
+    {
+        <tr>
+            <td>@rent.Client.FullName</td>
+            <td>@rent.Bike.Name</td>
+            <td>@rent.StartedAt.ToString()</td>
+            @if (rent.Deposit.Type == DepositTypes.Passport)
+            {
+                PassportDeposit passport = (PassportDeposit)rent.Deposit;
+                <td>@passport.Series
+                :@passport.Number</td>
+            } else
+            {
+                MoneyDeposit money = (MoneyDeposit)rent.Deposit;
+                <td>@money.Sum</td>
+
+            }
+        </tr>
+    }
+</table>
+<form action="~/RentService/TakeBike">
+    <button type="submit">Взять велосипед</button>
+</form><br /><br />
+<form action="~/RentService/ReturnBike">
+    <button type="submit">Вернуть велосипед</button>
+</form>

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<BikeViewModel>
+<style type="text/css">
+    #tbl {
+        width: 50%;
+        vertical-align: middle;
+    }
+</style>
+<table class="table" id="tbl">
+    <tr>
+        <td>Велосипед</td>
+        <td>Цена за час</td>
+    </tr>
+    @foreach (BikeViewModel bike in Model)
+    {
+
+        <tr>
+            <td>@bike.Name</td>
+            <td>@bike.HourCost</td>
+        </tr>
+    }
+</table>
+<form action="~/AddBike/AddBike">
+    <button type="submit">Добавить велосипед</button>
+</form><br/><br />
+<form action="~/AddBike/AddBikeToRentPoint">
+    <button type="submit">Добавить велосипед на точку проката</button>
+</form>
+
